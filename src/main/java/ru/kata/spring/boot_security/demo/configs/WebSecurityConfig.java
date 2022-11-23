@@ -29,14 +29,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
                 .antMatchers("/user").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
-                .antMatchers("/","/error").permitAll()
+                .antMatchers("/error").permitAll()
                 .antMatchers("/api/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().successHandler(successUserHandler)
                 .permitAll()
                 .and()
-                .logout().logoutUrl("/logout").logoutSuccessUrl("/")
+                .logout().logoutUrl("/logout").logoutSuccessUrl("/login")
                 .permitAll();
     }
 
@@ -48,7 +48,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         return authenticationProvider;
     }
-
-
 
 }

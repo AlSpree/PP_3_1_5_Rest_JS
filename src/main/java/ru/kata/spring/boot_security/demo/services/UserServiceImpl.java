@@ -26,9 +26,7 @@ public class UserServiceImpl implements UserDetailsService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final RoleRepository roleRepository;
-
     private final ModelMapper modelMapper;
-
 
     @Autowired
     public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, RoleRepository roleRepository, ModelMapper modelMapper) {
@@ -43,11 +41,6 @@ public class UserServiceImpl implements UserDetailsService {
         return userRepository.findAll();
     }
 
-
-    public User findUserByName(String name) {
-        Optional<User> foundUser = userRepository.findUserByName(name);
-        return foundUser.orElse(null);
-    }
 
     public User getUserById(int id) {
         Optional<User> user = userRepository.findUserById(id);
@@ -96,9 +89,6 @@ public class UserServiceImpl implements UserDetailsService {
     }
     public UserDTO userConvertToUserDTO (User user) {
         return modelMapper.map(user, UserDTO.class);
-    }
-    public Role roleDTOConvertToRole(RoleDTO roleDTO) {
-        return modelMapper.map(roleDTO, Role.class);
     }
     public RoleDTO roleConvertToRoleDTO(Role role) {
         return modelMapper.map(role, RoleDTO.class);
